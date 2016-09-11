@@ -10,7 +10,7 @@ var webpackConfig = {
   output: {
     path: './lib',
     filename: '[name].js',
-    library: 'libSeed',
+    library: 'boggLib',
     libraryTarget: 'umd'
   },
   module: {
