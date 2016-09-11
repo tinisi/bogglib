@@ -1,5 +1,8 @@
-import util from './util';
-
-export default (input) => {
-  return util().upper('woot' + input + 'yeah');
+export default {
+  possibleWords: (matrix) => {
+    return ['dog','cat', 'fee'];
+  },
+  scoringWords: (possibleWords) => {
+    return ['dog','cat']
+  }
 }

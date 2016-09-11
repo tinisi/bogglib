@@ -1,8 +1,15 @@
-import library from '../src/library';
+import boggLib from '../src/library';
 
-describe('library', () => {
-  it('upper cases, prepends woot and appends yeah to input, AKA "awesomeizes input"', () => {
-    let result = library('xxxxx');
-    expect(result).toEqual('WOOTXXXXXYEAH');
+describe('boggLib#possibleWords', () => {
+  it('returns an array of possible words', () => {
+    let result = boggLib.possibleWords();
+    expect(result).toEqual(['dog','cat', 'fee']);
+  });
+});
+
+describe('boggLib#scoringWords', () => {
+  it('returns an array of possible words', () => {
+    let result = boggLib.scoringWords();
+    expect(result).toEqual(['dog','cat']);
   });
 });
