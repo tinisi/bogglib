@@ -13,6 +13,9 @@ var webpackConfig = {
     library: 'boggLib',
     libraryTarget: 'umd'
   },
+  externals: {
+    'typo-js': 'typo-js'
+  },
   module: {
     loaders: [
       {
