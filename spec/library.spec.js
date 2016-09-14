@@ -95,33 +95,29 @@ describe('boggLib#walkMatrix', () => {
   let boggLib;
 
   beforeEach(() => {
-    boggLib = new BoggLib(4);
+    boggLib = new BoggLib(3);
   });
 
   let matrix = [
-    ['d','o','g','s'],
-    ['c','a','t','s'],
-    ['s','d','f','s'],
-    ['b','i','r','d']
+    ['d','o','g'],
+    ['c','a','t'],
+    ['s','d','f']
   ];
-  // let matrix = [
-  //   ['d','o','g'],
-  //   ['c','a','t'],
-  //   ['t','a','r']
-  // ];
+
   it('generate a long list of words starting from the first position', () => {
     let positions = [[0,0]];
     let words = [];
     boggLib.initMatrix(matrix);
     boggLib.walkMatrix(positions, words);
-    expect(words.length).toEqual(1012520);
+    expect(words.length).toEqual(1373);
   });
+
   it('generate a shorter list of words starting from the second row and third column', () => {
     let positions = [[1,2]];
     let words = [];
     boggLib.initMatrix(matrix);
     boggLib.walkMatrix(positions, words);
-    expect(words.length).toEqual(514668);
+    expect(words.length).toEqual(1037);
   });
 
 });
