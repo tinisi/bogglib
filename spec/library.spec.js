@@ -1,21 +1,85 @@
 import boggLib from '../src/library';
 
 describe('boggLib#possibleWords', () => {
-  it('returns an array of possible words', () => {
+
+  it('validates that the matrix is the correct height', () => {
     let matrix = [
-      ['d','o','g'],
-      ['c','a','t'],
-      ['s','d','f']
+      ['d','o','g','s'],
+      ['c','a','t','s']
     ]
     let result = boggLib.possibleWords(matrix);
-    expect(result).toEqual(['dog','cat', 'sdf']);
+    expect(result).toEqual('Not valid 4x4 matrix');
+  });
+
+  it('validates that the matrix is the correct width', () => {
+    let matrix = [
+      ['d','o','g','s'],
+      ['c','a','t'],
+      ['s','d','f','s'],
+      ['q','w','e','r']
+    ]
+    let result = boggLib.possibleWords(matrix);
+    expect(result).toEqual('Not valid 4x4 matrix');
+  });
+
+  it('returns an array of possible words', () => {
+    let matrix = [
+      ['d','o','g','s'],
+      ['c','a','t','s'],
+      ['s','d','f','s'],
+      ['b','i','r','d']
+    ]
+    let result = boggLib.possibleWords(matrix);
+    expect(result).toEqual(['dogs','cats', 'sdfs', 'bird']);
   });
 });
 
 describe('boggLib#scoringWords', () => {
   it('returns an array of possible words', () => {
-    let possibleWords = ['dog','cat', 'sdf'];
+    let possibleWords = ['dogs','cats', 'sdfs', 'bird'];
     let result = boggLib.scoringWords(possibleWords);
-    expect(result).toEqual(['dog','cat']);
+    expect(result).toEqual(['dogs','cats', 'bird']);
+  });
+});
+
+// these are likely temporary, public for now but should be private later
+
+describe('boggLib#getWord', () => {
+  let matrix = [
+    ['d','o','g','s'],
+    ['c','a','t','s'],
+    ['s','d','f','s'],
+    ['b','i','r','d']
+  ];
+  it('returns a string with letters in an array of positions', () => {
+    let positions = [[0,0],[1,1],[2,2],[3,3]];
+    let result = boggLib.getWord(matrix, positions);
+    expect(result).toEqual('dafd');
+  });
+});
+
+describe('boggLib#walkMatrix', () => {
+  let matrix = [
+    ['d','o','g','s'],
+    ['c','a','t','s'],
+    ['s','d','f','s'],
+    ['b','i','r','d']
+  ];
+  // let matrix = [
+  //   ['d','o','g'],
+  //   ['c','a','t'],
+  //   ['t','a','r']
+  // ];
+  it('generate a long list of words starting from the first position', () => {
+    let positions = [[0,0]];
+    let words = [];
+    boggLib.walkMatrix(matrix, positions, words);
+    expect(words.length).toEqual(1012520);
+  });
+  it('generate a shorter list of words starting from the second row and third column', () => {
+    let positions = [[1,2]];
+    let words = [];
+    boggLib.walkMatrix(matrix, positions, words);
+    expect(words.length).toEqual(514668);
   });
 });
