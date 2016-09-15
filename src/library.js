@@ -39,15 +39,18 @@ class BoggLib {
   }
 
   possibleWords() {
-    // todo: this is way wrong now, but refactoring one thing at a time ;-)
     let possibleWords = [];
-    for ( let line of this.matrix ) {
-      possibleWords.push(line.join(''));
-    }
-    return possibleWords;
+    // we need to walk the matrix, starting from each square
+    this.matrix.forEach((row, rowIndex) => {
+      row.forEach((column, colIndex) => {
+        this.walkMatrix([[rowIndex,colIndex]], possibleWords);
+      });
+    });
+    return _.uniq(possibleWords);
   }
 
-  scoringWords(possibleWords) {
+  scoringWords() {
+    let possibleWords = this.possibleWords();
     let scoringWords = [];
     let dictionary = new Typo("en_US");
     for ( let word of possibleWords ) {
