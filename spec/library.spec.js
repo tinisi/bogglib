@@ -29,7 +29,7 @@ describe('boggLib#initMatrix', () => {
 
 });
 
-describe('boggLib#possibleWords', () => {
+describe('boggLib#findPossibleWords', () => {
 
   let boggLib;
 
@@ -43,7 +43,7 @@ describe('boggLib#possibleWords', () => {
       ['c','a']
     ]
     boggLib.initMatrix(matrix);
-    let result = boggLib.possibleWords();
+    let result = boggLib.findPossibleWords();
     expect(result).toEqual([ 'doa', 'doac', 'doc', 'doca', 'dca', 'dcao', 'dco', 'dcoa', 'dac', 'daco', 'dao', 'daoc', 'oac', 'oacd', 'oad', 'oadc', 'odc', 'odca', 'oda', 'odac', 'oca', 'ocad', 'ocd', 'ocda', 'cao', 'caod', 'cad', 'cado', 'cdo', 'cdoa', 'cda', 'cdao', 'coa', 'coad', 'cod', 'coda', 'acd', 'acdo', 'aco', 'acod', 'aod', 'aodc', 'aoc', 'aocd', 'ado', 'adoc', 'adc', 'adco' ]);
   });
 });
@@ -51,44 +51,54 @@ describe('boggLib#possibleWords', () => {
 
 describe('boggLib#scoringWords', () => {
 
-  let boggLib;
+  describe('fast test', () => {
 
-  beforeEach(() => {
-    boggLib = new BoggLib(2, 3);
+    let boggLib;
+
+    beforeEach(() => {
+      boggLib = new BoggLib(2, 3);
+    });
+
+    it('returns an array of possible words', () => {
+      let matrix = [
+        ['d','o'],
+        ['c','g']
+      ];
+      boggLib.initMatrix(matrix);
+      let result = boggLib.scoringWords();
+      expect(result).toEqual([ 'dog', 'doc', 'cog', 'cod', 'god' ]);
+    });
+
   });
 
-  it('returns an array of possible words', () => {
-    let matrix = [
-      ['d','o'],
-      ['c','g']
-    ];
-    boggLib.initMatrix(matrix);
-    let result = boggLib.scoringWords();
-    expect(result).toEqual([ 'dog', 'doc', 'cog', 'cod', 'god' ]);
+  xdescribe('full test...sloooooowwww!', () => {
+
+    let boggLib;
+
+    beforeEach(() => {
+      boggLib = new BoggLib(4, 5);
+    });
+
+    it('returns an array of possible words', () => {
+
+      let matrix = [
+        ['t','h','i','s'],
+        ['i','s', 'n', 'o'],
+        ['q', 'u', 'i', 'c'],
+        ['m', 'a', 'n', 'k']
+      ];
+      boggLib.initMatrix(matrix);
+      let result = boggLib.scoringWords();
+      let expectedWord = result.findIndex((word) => {
+        return ( word === 'quick' );
+      });
+      expect(expectedWord).not.toEqual(-1);
+      expect(result.length).toEqual(24);
+    });
+
   });
-});
 
-// these are likely temporary, public for now but should be private later
 
-describe('boggLib#getWord', () => {
-
-  let boggLib;
-
-  beforeEach(() => {
-    boggLib = new BoggLib(3, 3);
-  });
-
-  it('returns a string with letters in an array of positions', () => {
-    let matrix = [
-      ['d','o','g'],
-      ['c','a','t'],
-      ['s','d','f']
-    ];
-    boggLib.initMatrix(matrix);
-    let positions = [[0,0],[1,1],[2,2]];
-    let result = boggLib.getWord(positions);
-    expect(result).toEqual('daf');
-  });
 });
 
 describe('boggLib#walkMatrix', () => {
