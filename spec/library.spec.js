@@ -5,7 +5,7 @@ describe('boggLib#possibleWords', () => {
   let boggLib;
   
   beforeEach(() => {
-    boggLib = new BoggLib(4);
+    boggLib = new BoggLib(4, 3);
   });
 
   it('validates that the matrix is the correct height', () => {
@@ -35,7 +35,7 @@ describe('boggLib#possibleWords', () => {
   let boggLib;
   
   beforeEach(() => {
-    boggLib = new BoggLib(4);
+    boggLib = new BoggLib(4, 3);
   });
 
   it('returns an array of possible words', () => {
@@ -56,7 +56,7 @@ describe('boggLib#scoringWords', () => {
   let boggLib;
 
   beforeEach(() => {
-    boggLib = new BoggLib(4);
+    boggLib = new BoggLib(4, 3);
   });
 
   it('returns an array of possible words', () => {
@@ -73,7 +73,7 @@ describe('boggLib#getWord', () => {
   let boggLib;
 
   beforeEach(() => {
-    boggLib = new BoggLib(4);
+    boggLib = new BoggLib(4, 3);
   });
 
   it('returns a string with letters in an array of positions', () => {
@@ -95,7 +95,7 @@ describe('boggLib#walkMatrix', () => {
   let boggLib;
 
   beforeEach(() => {
-    boggLib = new BoggLib(3);
+    boggLib = new BoggLib(3, 3);
   });
 
   let matrix = [
@@ -109,7 +109,8 @@ describe('boggLib#walkMatrix', () => {
     let words = [];
     boggLib.initMatrix(matrix);
     boggLib.walkMatrix(positions, words);
-    expect(words.length).toEqual(1373);
+    console.log(words);
+    expect(words.length).toEqual(1369);
   });
 
   it('generate a shorter list of words starting from the second row and third column', () => {
@@ -117,7 +118,8 @@ describe('boggLib#walkMatrix', () => {
     let words = [];
     boggLib.initMatrix(matrix);
     boggLib.walkMatrix(positions, words);
-    expect(words.length).toEqual(1037);
+    console.log(words);
+    expect(words.length).toEqual(1031);
   });
 
 });

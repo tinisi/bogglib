@@ -6,8 +6,9 @@ const adjacents = [[0, 1], [1, 0], [0, -1], [-1, 0], [1, 1], [-1, -1], [1, -1], 
 
 class BoggLib {
 
-  constructor(matrixSize) {
+  constructor(matrixSize, minWordSize) {
     this.matrixSize = matrixSize;
+    this.minWordSize = minWordSize;
     this.matrix = [[]];
   }
 
@@ -74,7 +75,9 @@ class BoggLib {
   // recursive method to walk the matrix
   walkMatrix(positions, words) {
     // add the current word to the list
-    words.push(this.getWord(positions));
+    if ( positions.length >= this.minWordSize) {
+      words.push(this.getWord(positions));
+    }
 
     // each time we recurse, we start at the last y,x coordinate in the positions array
     let lastPosition = positions[positions.length -1];
