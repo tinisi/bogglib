@@ -1,6 +1,6 @@
 {
   "name": "bogglib",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A library to encapsulate the logic needed to solve Boggle.",
   "main": "./lib/library.min.js",
   "scripts": {
